@@ -86,7 +86,7 @@ public class Inhabitant : MonoBehaviour
             happinessColor = Color.Lerp(NeutralColor, HappyColor, scaledHappiness);
         }
 
-        HappinessIndicator.GetComponent<Renderer>().material.color = happinessColor;
+        HappinessIndicator.GetComponent<Renderer>().material.SetColor("_EmissionColor", happinessColor);
 
         happinessManager.ReportHappiness(this);
     }
