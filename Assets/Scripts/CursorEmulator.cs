@@ -9,8 +9,8 @@ public class CursorEmulator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceFromCamera);
-        transform.position = sceneCamera.ScreenToWorldPoint(cursorPos);
+        //Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceFromCamera);
+        //transform.position = sceneCamera.ScreenToWorldPoint(cursorPos);
         transform.LookAt(paintObject.transform);
     }
 }

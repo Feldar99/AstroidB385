@@ -280,11 +280,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4265542121564228, guid: 1e309ab3b66ee8543a3b59e65ff0b482, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.35926247
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4265542121564228, guid: 1e309ab3b66ee8543a3b59e65ff0b482, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3.6096087
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4265542121564228, guid: 1e309ab3b66ee8543a3b59e65ff0b482, type: 2}
       propertyPath: m_LocalRotation.x
@@ -309,6 +309,26 @@ Prefab:
     - target: {fileID: 1118600964292624, guid: 1e309ab3b66ee8543a3b59e65ff0b482, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114824689991351442, guid: 1e309ab3b66ee8543a3b59e65ff0b482,
+        type: 2}
+      propertyPath: sceneCamera
+      value: 
+      objectReference: {fileID: 928458078}
+    - target: {fileID: 114824689991351442, guid: 1e309ab3b66ee8543a3b59e65ff0b482,
+        type: 2}
+      propertyPath: paintObject
+      value: 
+      objectReference: {fileID: 1342676120}
+    - target: {fileID: 198002183537792436, guid: 1e309ab3b66ee8543a3b59e65ff0b482,
+        type: 2}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198002183537792436, guid: 1e309ab3b66ee8543a3b59e65ff0b482,
+        type: 2}
+      propertyPath: randomSeed
+      value: 2042576889
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e309ab3b66ee8543a3b59e65ff0b482, type: 2}
@@ -398,7 +418,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 243821567253072352, guid: 8bac70c6aa5287a4cbc96832639aae76,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 785bf6fc24dfc0e46b8a1cd4724cd704, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -628,6 +648,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!20 &928458078 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20000010622200848, guid: b0047dd65ff208349bf3a5aaaeae24d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 525383370}
 --- !u!1001 &1065995782
 Prefab:
   m_ObjectHideFlags: 0
@@ -726,6 +751,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0c266c78bcb06448025de287b9b933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HappinessChangeRate: 10
+  MusicDelay: 15
+  UnhappyMusic: {fileID: 35285015}
+  NeutralMusic: {fileID: 603982718}
+  HappyMusic: {fileID: 1857965859}
+  UnhappyThreshold: -50
+  HappyThreshold: 50
+  MaxUnhappy: -100
+  MaxHappy: 100
 --- !u!4 &1307727645
 Transform:
   m_ObjectHideFlags: 0
@@ -920,7 +954,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

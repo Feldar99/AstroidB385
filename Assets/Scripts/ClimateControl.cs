@@ -12,7 +12,7 @@ public class ClimateControl : MonoBehaviour
     public int brushSize = 20;
     public float decayRate = 1;
     public float decayInterval = 0.2f;
-    
+
 
     private Color[] climate;
     private NVRHand cursorHand;
@@ -20,12 +20,14 @@ public class ClimateControl : MonoBehaviour
     private int interlaceFactor;
     private int interlaceIndex;
     private AudioSource rainSound;
+    private ParticleSystem rainParticles;
 
     void Start()
     {
         cursorHand = cursor.GetComponent<NVRHand>();
         interlaceFactor = (int) Mathf.Ceil(decayInterval / MIN_NOTICIBLE_DECAY_INTERVAL);
         rainSound = cursor.GetComponentInChildren<AudioSource>();
+        rainParticles = cursor.GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,14 @@ public class ClimateControl : MonoBehaviour
         if (cursorHand.UseButtonPressed)
         {
             Paint(cursor.transform.position);
+            if (!rainParticles.isPlaying)
+            {
+                rainParticles.Play();
+            }
+        }
+        else
+        {
+            rainParticles.Stop();
         }
         rainSound.mute = !cursorHand.UseButtonPressed;
     }
@@ -96,7 +106,7 @@ public class ClimateControl : MonoBehaviour
     {
         Color groundColor = GetColor(position);
         //Debug.Log("Ground Color: " + groundColor);
-        
+
         Color difference = groundColor - barrenColor;
 
         if (difference == Color.black)
@@ -117,6 +127,5 @@ public class ClimateControl : MonoBehaviour
             return difference.b / (vibrantColor.b - barrenColor.b);
         }
         return difference.a / (vibrantColor.a - barrenColor.a);
-
     }
 }

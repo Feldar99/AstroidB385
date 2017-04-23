@@ -249,6 +249,7 @@ MonoBehaviour:
   UnhappyColor: {r: 1, g: 0, b: 0, a: 1}
   NeutralColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   HappyColor: {r: 0, g: 1, b: 0, a: 1}
+  PickupPenalty: 10
 --- !u!114 &114998313672341324
 MonoBehaviour:
   m_ObjectHideFlags: 1
