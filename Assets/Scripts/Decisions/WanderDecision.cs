@@ -96,7 +96,6 @@ namespace Decisions
                 wanderDirection = rotation * previousWanderDirection;
             }
             Assert.AreNotApproximatelyEqual(wanderDirection.sqrMagnitude, 0);
-            print(wanderDirection.sqrMagnitude);
             wanderDirection.Normalize();
             
             //calculate wanderDestination and snap it to surface
