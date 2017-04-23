@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR.InteractionSystem;
 
-public class Inhabitant : MonoBehaviour
+public class Gravity3D : MonoBehaviour
 {
     private float radiusSquared;
-    private Rigidbody modelRigidbody;
 
     public Transform ModelTransform;
     public float Gravity;
@@ -14,11 +12,15 @@ public class Inhabitant : MonoBehaviour
     private Vector3 velocity;
     private bool gravityEnabled = true;
 
+    public float Radius
+    {
+        get { return Mathf.Sqrt(radiusSquared); }
+    }
+
     // Use this for initialization
     public void Start()
     {
         radiusSquared = ModelTransform.localPosition.sqrMagnitude;
-        modelRigidbody = ModelTransform.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -29,7 +31,6 @@ public class Inhabitant : MonoBehaviour
             Vector3 toCenter = transform.position - ModelTransform.position;
             toCenter.Normalize();
             velocity += toCenter * Gravity * Time.deltaTime;
-            Debug.Log("Velocity: " + velocity);
             SetPosition(ModelTransform.position + velocity * Time.deltaTime);
         }
         else
@@ -48,10 +49,7 @@ public class Inhabitant : MonoBehaviour
     public void SetPosition(Quaternion rotation,
         float distance)
     {
-        Debug.Log("Euler Angles:" + rotation.eulerAngles + "Distance: " + distance);
-        //Debug.Log(distance);
         transform.rotation = rotation;
-        Debug.Log(transform.rotation.eulerAngles);
         ModelTransform.position = transform.position + (transform.rotation * Vector3.up) * distance;
     }
 
