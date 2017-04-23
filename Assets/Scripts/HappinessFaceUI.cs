@@ -6,6 +6,34 @@ using UnityEngine.UI;
 public class HappinessFaceUI : MonoBehaviour {
     public Sprite happyFace, angryFace, neutralFace, rageFace, joyFace;
 
+    public Inhabitant WatchedInhabitant;
+
+    public void Update()
+    {
+        if (WatchedInhabitant)
+        {
+            if (WatchedInhabitant.Angry)
+            {
+                SwitchToRageFace();
+            }
+            else if (WatchedInhabitant.Unhappy)
+            {
+                SwitchToAngryFace();
+            }
+            else if (WatchedInhabitant.Happy)
+            {
+                SwitchToHappyFace();
+            }
+            else if (WatchedInhabitant.Joyous)
+            {
+                SwitchToJoyFace();
+            }
+            else
+            {
+                SwitchToNeutralFace();
+            }
+        }
+    }
 
     public void SwitchToAngryFace()
     {

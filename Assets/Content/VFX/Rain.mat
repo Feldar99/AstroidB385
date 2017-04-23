@@ -33,11 +33,11 @@ Material:
       second: 1
     - first:
         name: _InvFade
-      second: 1
+      second: 2.07
     m_Colors:
     - first:
         name: <noninit>
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _TintColor
-      second: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+      second: {r: 0.4323022, g: 0.8088235, b: 0.8088235, a: 0.5}

@@ -16,10 +16,10 @@ public class HappinessManager : MonoBehaviour
     public AudioSource NeutralMusic;
     public AudioSource HappyMusic;
 
-    public float UnhappyThreshold = -50;
-    public float HappyThreshold = 50;
-    public float MaxUnhappy = -100;
-    public float MaxHappy = 100;
+    public static float UnhappyThreshold = -50;
+    public static float HappyThreshold = 50;
+    public static float MaxUnhappy = -100;
+    public static float MaxHappy = 100;
 
 	// Use this for initialization
 	void Start ()

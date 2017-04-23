@@ -32,6 +32,31 @@ public class Inhabitant : MonoBehaviour
         get { return happiness; }
     }
 
+    public bool Neutral
+    {
+        get { return happiness > HappinessManager.UnhappyThreshold && happiness < HappinessManager.HappyThreshold; }
+    }
+
+    public bool Unhappy
+    {
+        get { return happiness <= HappinessManager.UnhappyThreshold && !Angry; }
+    }
+
+    public bool Happy
+    {
+        get { return happiness >= HappinessManager.HappyThreshold && !Joyous; }
+    }
+
+    public bool Angry
+    {
+        get { return happiness <= -MaxHappiness + Mathf.Epsilon; }
+    }
+
+    public bool Joyous
+    {
+        get { return happiness >= MaxHappiness - Mathf.Epsilon; }
+    }
+
     // Use this for initialization
     public void Start()
     {
