@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inhabitant : MonoBehaviour
 {
+    private float barrenTolerance = 0.25f;
     private float radiusSquared;
 
     public Transform ModelTransform;
@@ -15,11 +16,14 @@ public class Inhabitant : MonoBehaviour
     public Color NeutralColor = Color.yellow;
     public Color HappyColor = Color.green;
     public float PickupPenalty = 0.25f;
+    public float BarrenTolerance = 0.25f;
+    public ParticleSystem happySmileParticles;
+    public ParticleSystem flowerParticles;
 
     private Vector3 velocity;
     private bool held;
     private ClimateControl climateControl;
-    private float happiness;
+    public float happiness;
     private HappinessManager happinessManager;
 
     public float Radius
@@ -54,7 +58,7 @@ public class Inhabitant : MonoBehaviour
 
     public bool Joyous
     {
-        get { return happiness >= MaxHappiness - Mathf.Epsilon; }
+        get { return happiness >= MaxHappiness *.8f; }
     }
 
     // Use this for initialization
@@ -64,6 +68,7 @@ public class Inhabitant : MonoBehaviour
         climateControl = GetComponentInParent<ClimateControl>();
         happinessManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<HappinessManager>();
         happinessManager.RegisterInhabitant(this);
+        happiness = HappinessManager.HappyThreshold / 2;
     }
 
     // Update is called once per frame
@@ -93,10 +98,31 @@ public class Inhabitant : MonoBehaviour
         {
             life = -PickupPenalty;
         }
+        else
+        {
+            life = Mathf.Clamp(life, BarrenTolerance, 1);
+        }
         //Debug.Log("Life: " + life);
 
-        happiness += (life - 0.5f) * HappinessChangeRate * Time.deltaTime * 2;
+        float happinessDelta = (life - 0.5f) * HappinessChangeRate * Time.deltaTime * 2;
+
+        happiness += happinessDelta > 0 ? happinessDelta * 2 : happinessDelta;
         happiness = Mathf.Clamp(happiness, -MaxHappiness, MaxHappiness);
+        if (happinessDelta > 0)
+        {
+            if(!happySmileParticles.isPlaying)
+                happySmileParticles.Play();
+        }
+        else if(happySmileParticles.isPlaying)
+            happySmileParticles.Stop();
+
+        if (happiness > 80)
+        {
+            if(!flowerParticles.isPlaying)
+                flowerParticles.Play();
+        } else if (flowerParticles.isPlaying)
+            flowerParticles.Stop();
+
         //Debug.Log("Happiness: " + happiness);
 
         float scaledHappiness = happiness / MaxHappiness;

@@ -101,6 +101,7 @@ namespace Decisions
             //calculate wanderDestination and snap it to surface
             float distance = Random.Range(MinWanderDistance, MaxWanderDistance);
             wanderDestination = modelTransform.position + wanderDirection * distance;
+            modelTransform.LookAt(wanderDestination, surfaceNormal);
 
             Vector3 toWanderDestination = wanderDestination - transform.position;
             wanderDestination = toWanderDestination.normalized * inhabitant.Radius * transform.lossyScale.x + transform.position;

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HappinessManager : MonoBehaviour
 {
-
-    private int inhabitantCount;
-    private float globalHappiness;
+    public List<Inhabitant> inhabitants;
+    //private int inhabitantCount;
+    public float globalHappiness;
     private float musicTimer;
 
     public float HappinessChangeRate = 10;
@@ -25,6 +25,7 @@ public class HappinessManager : MonoBehaviour
 	void Start ()
 	{
 	    musicTimer = MusicDelay / 2;
+
 	}
 	
 	// Update is called once per frame
@@ -62,15 +63,29 @@ public class HappinessManager : MonoBehaviour
 
 	        musicTimer = MusicDelay;
 	    }
+
+        /*
+	    int joyCount = 0;
+	    foreach (Inhabitant inhabitant in inhabitants)
+	    {
+	        if (inhabitant.Joyous)
+	            joyCount++;
+	    }
+	    if (joyCount == inhabitants.Count)
+	    {
+	        
+	    }
+        */
 	}
 
     public void RegisterInhabitant(Inhabitant inhabitant)
     {
-        inhabitantCount++;
+        inhabitants.Add(inhabitant);
+        //inhabitantCount++;
     }
 
     public void ReportHappiness(Inhabitant inhabitant)
     {
-        globalHappiness += inhabitant.Happiness / inhabitantCount * Time.deltaTime * HappinessChangeRate;
+        globalHappiness += inhabitant.Happiness / inhabitants.Count * Time.deltaTime * HappinessChangeRate;
     }
 }

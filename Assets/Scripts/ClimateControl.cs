@@ -13,6 +13,7 @@ public class ClimateControl : MonoBehaviour
     public float decayRate = 1;
     public float decayInterval = 0.2f;
     public ParticleSystem RainParticles;
+    public GameObject cloudObject;
 
 
     private Color[] climate;
@@ -53,11 +54,13 @@ public class ClimateControl : MonoBehaviour
             if (!RainParticles.isPlaying)
             {
                 RainParticles.Play();
+                cloudObject.SetActive(true);
             }
         }
         else
         {
             RainParticles.Stop();
+            cloudObject.SetActive(false);
         }
         rainSound.mute = !cursorHand.UseButtonPressed;
     }

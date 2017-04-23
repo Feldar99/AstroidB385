@@ -8,15 +8,29 @@ public class HappinessFaceUI : MonoBehaviour {
 
     public Inhabitant WatchedInhabitant;
 
+    private HappinessManager happinessManager;
+
+    private void Start() {
+        happinessManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<HappinessManager>();
+    }
+
     public void Update()
     {
+        //float joyThreshold = HappinessManager.MaxHappy * .8f;
+        //if (happinessManager.globalHappiness > joyThreshold)
+        //{
+        //    SwitchToJoyFace();
+        //    return;
+        //}
+
+
         if (WatchedInhabitant)
         {
-            if (WatchedInhabitant.Angry)
-            {
-                SwitchToRageFace();
-            }
-            else if (WatchedInhabitant.Unhappy)
+            //if (WatchedInhabitant.Angry)
+            //{
+            //    SwitchToRageFace();
+            //}
+            if (WatchedInhabitant.Unhappy || WatchedInhabitant.Angry)
             {
                 SwitchToAngryFace();
             }
