@@ -76,4 +76,47 @@ public class ClimateControl : MonoBehaviour
             tex.Apply();
         }
     }
+
+    public Color GetColor(Vector3 position)
+    {
+        Texture2D tex = paintObject.GetComponent<Renderer>().material.mainTexture as Texture2D;
+        RaycastHit hit;
+        Ray cursorRay = new Ray(position, paintObject.transform.position - position);
+        if (Physics.Raycast(cursorRay, out hit, 200))
+        {
+            Vector2 pixelUV = hit.textureCoord;
+            rainSound.transform.position = hit.point;
+            return tex.GetPixelBilinear(pixelUV.x, pixelUV.y);
+        }
+
+        return barrenColor;
+    }
+
+    public float GetTerrainLife(Vector3 position)
+    {
+        Color groundColor = GetColor(position);
+        //Debug.Log("Ground Color: " + groundColor);
+        
+        Color difference = groundColor - barrenColor;
+
+        if (difference == Color.black)
+        {
+            return 0;
+        }
+
+        if (Mathf.Abs(difference.r) > Mathf.Epsilon)
+        {
+            return difference.r / (vibrantColor.r - barrenColor.r);
+        }
+        if (Mathf.Abs(difference.g) > Mathf.Epsilon)
+        {
+            return difference.g / (vibrantColor.g - barrenColor.g);
+        }
+        if (Mathf.Abs(difference.b) > Mathf.Epsilon)
+        {
+            return difference.b / (vibrantColor.b - barrenColor.b);
+        }
+        return difference.a / (vibrantColor.a - barrenColor.a);
+
+    }
 }

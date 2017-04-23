@@ -13,7 +13,7 @@ namespace Decisions
         public GameObject TargetIndicatorPrefab;
 
         private Vector3 wanderDestination;
-        private Gravity3D gravity3D;
+        private Inhabitant inhabitant;
         private Transform modelTransform;
         private Vector3 previousWanderDirection;
         private GameObject targetIndicator;
@@ -21,8 +21,8 @@ namespace Decisions
         // Use this for initialization
         void Start()
         {
-            gravity3D = GetComponent<Gravity3D>();
-            modelTransform = gravity3D.ModelTransform;
+            inhabitant = GetComponent<Inhabitant>();
+            modelTransform = inhabitant.ModelTransform;
         }
 
         // Update is called once per frame
@@ -52,7 +52,7 @@ namespace Decisions
 
             if (distanceSquared <= wanderDistance * wanderDistance)
             {
-                gravity3D.SetPosition(wanderDestination);
+                inhabitant.SetPosition(wanderDestination);
                 if (targetIndicator != null)
                 {
                     GameObject.Destroy(targetIndicator);
@@ -61,7 +61,7 @@ namespace Decisions
             }
 
             toDestination.Normalize();
-            gravity3D.SetPosition(modelTransform.position + toDestination * wanderDistance);
+            inhabitant.SetPosition(modelTransform.position + toDestination * wanderDistance);
 
             return false;
         }
@@ -103,7 +103,7 @@ namespace Decisions
             wanderDestination = modelTransform.position + wanderDirection * distance;
 
             Vector3 toWanderDestination = wanderDestination - transform.position;
-            wanderDestination = toWanderDestination.normalized * gravity3D.Radius * transform.lossyScale.x + transform.position;
+            wanderDestination = toWanderDestination.normalized * inhabitant.Radius * transform.lossyScale.x + transform.position;
 
             previousWanderDirection = wanderDestination - modelTransform.position;
             
